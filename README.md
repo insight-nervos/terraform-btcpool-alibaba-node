@@ -26,6 +26,45 @@ module "this" {
 No issue is creating limit on this module.
 
 <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
+## Requirements
+
+No requirements.
+
+## Providers
+
+| Name | Version |
+|------|---------|
+| alicloud | n/a |
+
+## Inputs
+
+| Name | Description | Type | Default | Required |
+|------|-------------|------|---------|:--------:|
+| assign\_public\_ip | Bool to enable assignment of public IP address. Overridden by create\_eip. | `bool` | `true` | no |
+| create | Boolean to make module or not | `bool` | `true` | no |
+| create\_ansible | Boolean to make module or not | `bool` | `true` | no |
+| create\_eip | Bool to create and attach EIP to instance | `bool` | `false` | no |
+| environment | The environment | `string` | `""` | no |
+| instance\_cpu\_cores | Instance CPU cores | `string` | `"2"` | no |
+| instance\_family | Instance family | `string` | `"ecs.g6"` | no |
+| instance\_memory | Instance memory (in GB) | `string` | `"8"` | no |
+| key\_name | The name of the preexisting key to be used instead of the local public\_key\_path | `string` | `""` | no |
+| name | The name of the deployment | `string` | `"polkadot-api"` | no |
+| namespace | The namespace to deploy into | `string` | `""` | no |
+| node\_name | Name of the node | `string` | `""` | no |
+| owner | Owner of the infrastructure | `string` | `""` | no |
+| private\_key\_path | Path to private key | `string` | `""` | no |
+| public\_key | The public ssh key. key\_name takes precidence | `string` | `""` | no |
+| root\_volume\_size | Root volume size | `string` | `0` | no |
+| security\_group\_id | The id of the security group to run in | `string` | n/a | yes |
+| ssh\_user | Username for SSH | `string` | `"ubuntu"` | no |
+| stage | The stage of the deployment | `string` | `""` | no |
+| vpc\_id | The ID of the VPC to attach. | `string` | n/a | yes |
+| vswitch\_id | The ids of the vswitch to attach. | `string` | n/a | yes |
+
+## Outputs
+
+No output.
 
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 
