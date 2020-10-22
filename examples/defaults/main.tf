@@ -3,7 +3,7 @@ provider "alicloud" {
 }
 
 module "vpc" {
-  source   = "git@github.com:insight-nervos/terraform-btcpool-alibaba-network.git?ref=dev"
+  source   = "git@github.com:insight-nervos/terraform-btcpool-alibaba-network.git"
   vpc_name = var.vpc_name
   num_azs  = 2
 }
