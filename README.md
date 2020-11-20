@@ -41,30 +41,38 @@ No requirements.
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | assign\_public\_ip | Bool to enable assignment of public IP address. Overridden by create\_eip. | `bool` | `true` | no |
+| bastion\_ip | Optional IP for bastion - blank for no bastion | `string` | `""` | no |
+| bastion\_user | Optional bastion user - blank for no bastion | `string` | `""` | no |
+| btcpool\_env\_file\_path | Path to .env file for deployment | `string` | `""` | no |
 | create | Boolean to make module or not | `bool` | `true` | no |
-| create\_ansible | Boolean to make module or not | `bool` | `true` | no |
-| create\_eip | Bool to create and attach EIP to instance | `bool` | `false` | no |
-| environment | The environment | `string` | `""` | no |
+| create\_dns | Bool to create ssl cert and nginx proxy | `bool` | `true` | no |
+| create\_eip | Bool to create and attach EIP to instance | `bool` | `true` | no |
+| domain\_name | The domain - example.com. Blank for no ssl / nginx | `string` | `""` | no |
+| enable\_btcpool\_ssl | Bool to enable SSL | `bool` | `false` | no |
+| hostname | The hostname - ie hostname.example.com - blank for example.com | `string` | `""` | no |
 | instance\_cpu\_cores | Instance CPU cores | `string` | `"2"` | no |
 | instance\_family | Instance family | `string` | `"ecs.g6"` | no |
 | instance\_memory | Instance memory (in GB) | `string` | `"8"` | no |
-| key\_name | The name of the preexisting key to be used instead of the local public\_key\_path | `string` | `""` | no |
-| name | The name of the deployment | `string` | `"polkadot-api"` | no |
-| namespace | The namespace to deploy into | `string` | `""` | no |
+| key\_name | The key pair to import - leave blank to generate new keypair from pub/priv ssh key path | `string` | `""` | no |
+| name | The name for the label | `string` | `"btcpool"` | no |
 | node\_name | Name of the node | `string` | `""` | no |
-| owner | Owner of the infrastructure | `string` | `""` | no |
+| playbook\_vars | Additional playbook vars | `map(string)` | `{}` | no |
 | private\_key\_path | Path to private key | `string` | `""` | no |
-| public\_key | The public ssh key. key\_name takes precidence | `string` | `""` | no |
-| root\_volume\_size | Root volume size | `string` | `0` | no |
+| public\_key\_path | The path to the public ssh key | `string` | `""` | no |
+| root\_volume\_size | Root volume size | `string` | `"20"` | no |
 | security\_group\_id | The id of the security group to run in | `string` | n/a | yes |
-| ssh\_user | Username for SSH | `string` | `"ubuntu"` | no |
-| stage | The stage of the deployment | `string` | `""` | no |
+| suffix | Suffix to attach to name | `string` | `""` | no |
+| tags | Map of tags | `map(string)` | `{}` | no |
 | vpc\_id | The ID of the VPC to attach. | `string` | n/a | yes |
 | vswitch\_id | The ids of the vswitch to attach. | `string` | n/a | yes |
 
 ## Outputs
 
-No output.
+| Name | Description |
+|------|-------------|
+| instance\_id | n/a |
+| key\_name | n/a |
+| public\_ip | n/a |
 
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 

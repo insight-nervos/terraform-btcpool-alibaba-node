@@ -32,6 +32,7 @@ func TestTerraformDefaults(t *testing.T) {
 		Vars: map[string]interface{}{
 			"vpc_name": "cci-test",
 			"public_key_path": publicKeyPath,
+			"private_key_path": privateKeyPath,
 		},
 	}
 
