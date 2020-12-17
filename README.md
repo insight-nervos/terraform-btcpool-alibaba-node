@@ -5,7 +5,17 @@
 
 ## Features
 
-This module...
+This module sets up a Nervos mining pool on Alibaba Cloud with terraform. It uses an [Ansible role](https://github.com/insight-stratum/ansible-role-btcpool) 
+to configure a node with docker and run a [btcpool docker-compose](https://github.com/insight-stratum/btcpool-docker-compose) 
+setup. 
+
+For AWS, check github organization. 
+
+#### Dependencies 
+
+- [ansible-role-btcpool](https://github.com/insight-stratum/ansible-role-btcpool)
+- [btcpool-docker-compose](https://github.com/insight-stratum/btcpool-docker-compose)
+- [btcpool](https://github.com/btccom/btcpool)
 
 ## Terraform Versions
 
@@ -13,11 +23,43 @@ For Terraform v0.12.0+
 
 ## Usage
 
+[Install terraform v0.13+](https://learn.hashicorp.com/tutorials/terraform/install-cli), [get Alibaba credentials](https://partners-intl.aliyun.com/help/doc-detail/91289.htm), clone this repository and cd into it. 
+
+```shell script
+# Create ssh keys and take note of path 
+ssh-keygen -b 4096 
+# Modify the terraform.tfvars and remove comments ('//')
+nano terraform.tfvars 
+terraform init 
+terraform apply 
+```
+
+### Example module 
+
 ```hcl
-module "this" {
+provider "alicloud" {
+  region = var.alicloud_region
+}
+
+module "vpc" {
+  source   = "git@github.com:insight-nervos/terraform-btcpool-alibaba-network.git"
+  vpc_name = var.vpc_name
+  num_azs  = 2
+}
+
+module "defaults" {
   source = "github.com/insight-nervos/terraform-btcpool-alibaba-node"
+  security_group_id = module.vpc.node_security_group_id
+  vpc_id            = module.vpc.vpc_id
+  vswitch_id        = module.vpc.public_vswitch_ids[0]
+  root_volume_size  = "50"
+  create_eip        = true
+  public_key        = file(var.public_key_path)
 }
 ```
+
+For more advanced configurations, 
+
 ## Examples
 
 - [defaults](https://github.com/insight-nervos/terraform-btcpool-alibaba-node/tree/master/examples/defaults)
@@ -26,10 +68,6 @@ module "this" {
 No issue is creating limit on this module.
 
 <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
-## Requirements
-
-No requirements.
-
 ## Providers
 
 | Name | Version |
@@ -39,7 +77,7 @@ No requirements.
 ## Inputs
 
 | Name | Description | Type | Default | Required |
-|------|-------------|------|---------|:--------:|
+|------|-------------|------|---------|:-----:|
 | assign\_public\_ip | Bool to enable assignment of public IP address. Overridden by create\_eip. | `bool` | `true` | no |
 | bastion\_ip | Optional IP for bastion - blank for no bastion | `string` | `""` | no |
 | bastion\_user | Optional bastion user - blank for no bastion | `string` | `""` | no |
@@ -61,6 +99,7 @@ No requirements.
 | public\_key\_path | The path to the public ssh key | `string` | `""` | no |
 | root\_volume\_size | Root volume size | `string` | `"20"` | no |
 | security\_group\_id | The id of the security group to run in | `string` | n/a | yes |
+| stack\_type | The type of stack to deploy - | `string` | `"prometheus"` | no |
 | suffix | Suffix to attach to name | `string` | `""` | no |
 | tags | Map of tags | `map(string)` | `{}` | no |
 | vpc\_id | The ID of the VPC to attach. | `string` | n/a | yes |

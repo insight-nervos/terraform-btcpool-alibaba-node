@@ -31,6 +31,12 @@ variable "btcpool_env_file_path" {
   default     = ""
 }
 
+variable "stack_type" {
+  description = "The type of stack to deploy - "
+  default     = "prometheus"
+  type        = string
+}
+
 module "ansible" {
   source           = "git@github.com:insight-infrastructure/terraform-ansible-playbook.git"
   create           = var.create
@@ -46,7 +52,7 @@ module "ansible" {
   forks                  = 1
 
   playbook_vars = merge({
-    enable_btcpool_ssl = var.domain_name != "" ? false : var.enable_btcpool_ssl
-    env_file_path      = var.btcpool_env_file_path
+    stack_type    = var.stack_type
+    env_file_path = var.btcpool_env_file_path
   }, var.playbook_vars)
 }
