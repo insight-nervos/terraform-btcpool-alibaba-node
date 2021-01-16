@@ -38,7 +38,7 @@ variable "stack_type" {
 }
 
 module "ansible" {
-  source           = "git@github.com:insight-infrastructure/terraform-ansible-playbook.git"
+  source           = "github.com/insight-infrastructure/terraform-ansible-playbook.git?ref=v0.15.0"
   create           = var.create
   ip               = var.create_eip ? join("", alicloud_eip.this.*.ip_address) : join("", alicloud_instance.this.*.public_ip)
   user             = "root"
