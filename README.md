@@ -68,6 +68,10 @@ For more advanced configurations,
 No issue is creating limit on this module.
 
 <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
+## Requirements
+
+No requirements.
+
 ## Providers
 
 | Name | Version |
@@ -77,7 +81,7 @@ No issue is creating limit on this module.
 ## Inputs
 
 | Name | Description | Type | Default | Required |
-|------|-------------|------|---------|:-----:|
+|------|-------------|------|---------|:--------:|
 | assign\_public\_ip | Bool to enable assignment of public IP address. Overridden by create\_eip. | `bool` | `true` | no |
 | bastion\_ip | Optional IP for bastion - blank for no bastion | `string` | `""` | no |
 | bastion\_user | Optional bastion user - blank for no bastion | `string` | `""` | no |
