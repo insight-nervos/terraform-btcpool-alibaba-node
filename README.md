@@ -13,13 +13,12 @@ For AWS, check github organization.
 
 #### Dependencies 
 
-- [ansible-role-btcpool](https://github.com/insight-stratum/ansible-role-btcpool)
-- [btcpool-docker-compose](https://github.com/insight-stratum/btcpool-docker-compose)
-- [btcpool](https://github.com/btccom/btcpool)
-
-## Terraform Versions
-
-For Terraform v0.12.0+
+- [Terraform v0.12.0+](https://learn.hashicorp.com/tutorials/terraform/install-cli)
+- [Ansible - v2.9+](https://github.com/ansible/ansible) - `pip install ansible`
+- Python
+- Submodules (nothing to install)
+    - [ansible-role-btcpool](https://github.com/insight-stratum/ansible-role-btcpool)
+    - [btcpool-docker-compose](https://github.com/insight-stratum/btcpool-docker-compose)
 
 ## Usage
 
