@@ -74,13 +74,13 @@ resource "alicloud_eip_association" "this" {
 resource "alicloud_instance" "this" {
   count             = var.create ? 1 : 0
   instance_name     = var.node_name != "" ? var.node_name : null
-  availability_zone = data.alicloud_vswitches.this.vswitches.0.zone_id
+  availability_zone = alicloud_vswitch.public[0].availability_zone
 
   image_id        = data.alicloud_images.this.images[0].id
   instance_type   = data.alicloud_instance_types.this.instance_types[0].id
-  security_groups = [var.security_group_id]
+  security_groups = [alicloud_security_group.node-sg.id]
 
-  vswitch_id                 = var.vswitch_id
+  vswitch_id                 = alicloud_vswitch.public[0].id
   internet_max_bandwidth_out = ! var.create_eip && var.assign_public_ip ? 100 : 0
 
   system_disk_size = var.root_volume_size
