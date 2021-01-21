@@ -31,39 +31,6 @@ variable "tags" {
   default     = {}
 }
 
-#########
-# Network
-#########
-variable "vpc_name" {
-  description = "The name of the VPC"
-  type        = string
-  default     = ""
-}
-
-variable "azs" {
-  description = "List of availability zones"
-  type        = list(string)
-  default     = []
-}
-
-variable "num_azs" {
-  description = "The number of AZs to deploy into"
-  type        = number
-  default     = 0
-}
-
-variable "cidr" {
-  description = "The cidr range for network"
-  type        = string
-  default     = "10.0.0.0/16"
-}
-
-variable "create_private_subnets" {
-  description = "Bool to enable creation of private subnets"
-  type        = bool
-  default     = false
-}
-
 ##################
 # Security Groups
 ##################

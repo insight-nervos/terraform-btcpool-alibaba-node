@@ -98,7 +98,7 @@ No requirements.
 | name | The name for the label | `string` | `"btcpool"` | no |
 | node\_name | Name of the node | `string` | `""` | no |
 | node\_sg\_name | Name for the node security group | `string` | `"node-sg"` | no |
-| num\_azs | The number of AZs to deploy into | `number` | `0` | no |
+| num\_azs | The number of AZs to deploy into | `number` | `1` | no |
 | playbook\_vars | Additional playbook vars | `map(string)` | `{}` | no |
 | private\_key\_path | Path to private key | `string` | `""` | no |
 | public\_key\_path | The path to the public ssh key | `string` | `""` | no |
@@ -107,20 +107,19 @@ No requirements.
 | stack\_type | The type of stack to deploy - | `string` | `"prometheus"` | no |
 | suffix | Suffix to attach to name | `string` | `""` | no |
 | tags | Map of tags | `map(string)` | `{}` | no |
-| vpc\_name | The name of the VPC | `string` | `""` | no |
 
 ## Outputs
 
 | Name | Description |
 |------|-------------|
-| bastion\_security\_group\_id | #### SGs #### |
-| instance\_id | n/a |
-| key\_name | n/a |
-| node\_security\_group\_id | n/a |
-| private\_vswitch\_ids | n/a |
-| public\_ip | n/a |
-| public\_vswitch\_ids | n/a |
-| vpc\_id | n/a |
+| bastion\_security\_group\_id | The ID of the Bastion security group |
+| instance\_id | The Alicloud ID of the instance |
+| key\_name | The name of the SSH key |
+| node\_security\_group\_id | The ID of the instance security group |
+| private\_vswitch\_ids | The IDs of the Vswitches for the private subnets |
+| public\_ip | The public IP of the instance |
+| public\_vswitch\_ids | The IDs of the Vswitches for the public subnets |
+| vpc\_id | The ID of the VPC where the instance is deployed |
 
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 

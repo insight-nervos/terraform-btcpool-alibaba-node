@@ -2,7 +2,7 @@ variable "alicloud_region" {
   default = "us-east-1"
 }
 
-variable "vpc_name" {
+variable "name" {
   default = "example"
 }
 
@@ -15,7 +15,7 @@ provider "alicloud" {
 
 module "defaults" {
   source           = "../.."
-  vpc_name         = var.vpc_name
+  name             = var.name
   num_azs          = 2
   public_key_path  = var.public_key_path
   private_key_path = var.private_key_path

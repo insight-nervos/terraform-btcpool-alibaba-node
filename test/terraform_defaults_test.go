@@ -30,7 +30,7 @@ func TestTerraformDefaults(t *testing.T) {
 
 		// Variables to pass to our Terraform code using -var options
 		Vars: map[string]interface{}{
-			"vpc_name": "cci-test",
+			"name": "cci-test",
 			"public_key_path": publicKeyPath,
 			"private_key_path": privateKeyPath,
 		},

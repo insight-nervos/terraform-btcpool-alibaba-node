@@ -1,3 +1,27 @@
+variable "azs" {
+  description = "List of availability zones"
+  type        = list(string)
+  default     = []
+}
+
+variable "num_azs" {
+  description = "The number of AZs to deploy into"
+  type        = number
+  default     = 1
+}
+
+variable "cidr" {
+  description = "The cidr range for network"
+  type        = string
+  default     = "10.0.0.0/16"
+}
+
+variable "create_private_subnets" {
+  description = "Bool to enable creation of private subnets"
+  type        = bool
+  default     = false
+}
+
 locals {
   //    Logic for AZs is azs variable > az_num variable > max azs for region
   az_num = chunklist(data.alicloud_zones.az.ids, var.num_azs)[0]
@@ -24,7 +48,7 @@ locals {
 }
 
 resource "alicloud_vpc" "vpc" {
-  name       = var.vpc_name
+  name       = local.name_camel_case
   cidr_block = var.cidr
 }
 
