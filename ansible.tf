@@ -41,8 +41,9 @@ module "ansible" {
   source           = "github.com/insight-infrastructure/terraform-ansible-playbook.git?ref=v0.15.0"
   create           = var.create
   ip               = var.create_eip ? join("", alicloud_eip.this.*.ip_address) : join("", alicloud_instance.this.*.public_ip)
-  user             = "root"
-  private_key_path = var.private_key_path
+  user             = "ubuntu"
+  private_key_path = pathexpand(var.private_key_path)
+  become           = true
 
   bastion_ip   = var.bastion_ip
   bastion_user = var.bastion_user

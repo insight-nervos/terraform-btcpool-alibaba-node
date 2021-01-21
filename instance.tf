@@ -85,7 +85,8 @@ resource "alicloud_instance" "this" {
 
   system_disk_size = var.root_volume_size
 
-  key_name = var.public_key_path == "" ? var.key_name : alicloud_key_pair.this.*.key_name[0]
+  user_data = templatefile("${path.module}/userdata.sh.tpl", { ssh_key = chomp(file(pathexpand(var.public_key_path))) })
+  key_name  = var.public_key_path == "" ? var.key_name : alicloud_key_pair.this.*.key_name[0]
 
   tags = merge({ Name = local.name_suffix }, var.tags)
 }
